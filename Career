@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalBridge - Indische Fachkräfte für Deutschland</title>
+    <style>
+        :root {
+            --primary: #3730a3;
+            --secondary: #4f46e5;
+            --accent: #6366f1;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            position: relative;
+            background-color: transparent;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .header-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+            z-index: 1;
+        }
+        
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 6rem 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #4b5563;
+        }
+        
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 0 0 calc(25% - 1.5rem);
+            max-width: calc(25% - 1.5rem);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-icon {
+            background-color: var(--light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 0;
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .process .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 8%;
+            right: 8%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+        
+        .step-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .step:hover .step-content {
+            transform: translateY(-10px);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .author-info p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        .cta .btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .cta .btn:hover {
+            background-color: var(--light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Animation Effects */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .services-grid {
+                justify-content: center;
+            }
+            
+            .service-card {
+                flex: 0 0 calc(50% - 1.5rem);
+                max-width: calc(50% - 1.5rem);
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .service-card {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Background Image -->
+    <header>
+        <div class="header-image">
+            <img src="/api/placeholder/1920/1080" alt="Teamwork in der IT-Branche">
+        </div>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">GlobalBridge</a>
+                <ul class="nav-links">
+                    <li><a href="#">Start</a></li>
+                    <li><a href="#services">Leistungen</a></li>
+                    <li><a href="#process">Prozess</a></li>
+                    <li><a href="#testimonials">Erfolgsgeschichten</a></li>
+                    <li><a href="#contact" class="btn">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Hero Section integrated into header -->
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-text fade-in-up">
+                        <h1>Ihre Brücke zu neuen Karrieren in Deutschland</h1>
+                        <p>GlobalBridge unterstützt qualifizierte Fachkräfte aus Indien beim Berufseinstieg in Deutschland - von der Jobsuche über Visa-Anträge bis zur Integration in die deutsche Gesellschaft.</p>
+                        <a href="#contact" class="btn">Jetzt beraten lassen</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Leistungen</h2>
+                <p>Wir bieten einen umfassenden Service, um indischen Fachkräften den Start in Deutschland so einfach wie möglich zu gestalten.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in-up delay-1">
+                    <div class="service-icon">
+                        <span>📋</span>
+                    </div>
+                    <h3>Jobvermittlung</h3>
+                    <p>Wir verbinden qualifizierte Fachkräfte mit passenden Arbeitgebern in Deutschland und begleiten sie durch den gesamten Bewerbungsprozess.</p>
+                </div>
+                <div class="service-card fade-in-up delay-2">
+                    <div class="service-icon">
+                        <span>🏠</span>
+                    </div>
+                    <h3>Wohnungssuche</h3>
+                    <p>Unsere Experten unterstützen bei der Suche nach passenden Wohnungen und helfen bei allen Formalitäten rund um den Mietvertrag.</p>
+                </div>
+                <div class="service-card fade-in-up delay-3">
+                    <div class="service-icon">
+                        <span>🛂</span>
+                    </div>
+                    <h3>Visa & Behörden</h3>
+                    <p>Wir leiten durch den komplexen Prozess der Visumsbeantragung und übernehmen die Kommunikation mit den deutschen Behörden.</p>
+                </div>
+                <div class="service-card fade-in-up delay-4">
+                    <div class="service-icon">
+                        <span>🤝</span>
+                    </div>
+                    <h3>Integration</h3>
+                    <p>Mit unseren Integrationsprogrammen erleichtern wir den Einstieg in das Leben und die Kultur in Deutschland.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section - Redesigned -->
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unser Prozess</h2>
+                <p>Von der ersten Kontaktaufnahme bis zur erfolgreichen Integration - wir begleiten Sie auf jedem Schritt des Weges.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step fade-in-up">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Erstgespräch & Beratung</h3>
+                        <p>Im ersten Schritt lernen wir Sie und Ihre beruflichen Qualifikationen kennen und entwickeln gemeinsam einen individuellen Plan.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-1">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Jobsuche & Bewerbung</h3>
+                        <p>Wir optimieren Ihre Unterlagen für den deutschen Arbeitsmarkt und stellen den Kontakt zu passenden Arbeitgebern her.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-2">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Visa & Vorbereitung</h3>
+                        <p>Nach der Jobzusage unterstützen wir Sie bei der Beantragung des Arbeitsvisums und bei allen notwendigen Vorbereitungen.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up delay-3">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Ankunft & Integration</h3>
+                        <p>Wir organisieren Ihre Ankunft in Deutschland, helfen bei der Wohnungssuche und bieten Integrationsprogramme an.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Erfolgsgeschichten</h2>
+                <p>Erfahren Sie, wie wir indischen Fachkräften geholfen haben, ihren Traum von einer Karriere in Deutschland zu verwirklichen.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-text">
+                        <p>"Dank GlobalBridge habe ich nicht nur einen großartigen Job als Softwareentwickler in München gefunden, sondern auch vom ersten Tag an eine Wohnung und alle notwendigen Papiere gehabt. Der Übergang war viel einfacher als erwartet."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="Rajesh Kumar">
+                        </div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Softwareentwickler aus Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up delay-1">
+                    <div class="testimonial-text">
+                        <p>"Das Team von GlobalBridge hat mir bei jedem Schritt geholfen. Von der Anerkennung meiner medizinischen Qualifikationen bis zur Unterstützung beim Erlernen der deutschen Sprache - sie haben alles abgedeckt!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="Priya Sharma">
+                        </div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Krankenschwester aus Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-up delay-2">
+                    <div class="testimonial-text">
+                        <p>"Als Ingenieur war der deutsche Arbeitsmarkt für mich sehr attraktiv, aber die Bürokratie erschien unüberwindbar. GlobalBridge hat diesen Prozess für mich transparent und machbar gestaltet."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="Vikram Patel">
+                        </div>
+                        <div class="author-info">
+                            <h4>Vikram Patel</h4>
+                            <p>Elektroingenieur aus Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Starten Sie Ihre Karriere in Deutschland</h2>
+            <p>Nehmen Sie Kontakt mit uns auf und erfahren Sie, wie wir Ihnen helfen können, Ihren beruflichen Weg in Deutschland erfolgreich zu gestalten.</p>
+            <a href="#" class="btn">Jetzt kontaktieren</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>GlobalBridge</h3>
+                    <p>Wir verbinden qualifizierte Fachkräfte aus Indien mit Karrierechancen in Deutschland.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontakt</h3>
+                    <ul class="footer-links">
+                        <li>info@globalbridge.de</li>
+                        <li>+49 30 1234567</li>
+                        <li>Hauptstraße 123, 10115 Berlin</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Über uns</a></li>
+                        <li><a href="#">Leistungen</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Rechtliches</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GlobalBridge. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
